@@ -10,7 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
-	Rocketship Rocket;
+	Rocketship Rocket = new Rocketship(250,700,50,50);
+
 final int MENU = 0;
 final int GAME = 1;
 final int END = 2;
@@ -19,7 +20,6 @@ Timer timer;
 Font titlefont;
 Font textfont1;
 	GamePanel(){
-		Rocket = new Rocketship(250,700,50,50);
 		timer= new Timer(1000/60, this);
 		titlefont = new Font("Arial", Font.PLAIN, 48);
 	textfont1= new Font("Arial", Font.PLAIN, 24);
@@ -77,11 +77,7 @@ void startGame() {
 	timer= new Timer(1000/60,this);
 	timer.start();
 }
-@Override
-public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("Key typed");
-}
+
 @Override
 public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
@@ -109,6 +105,11 @@ public void keyPressed(KeyEvent e) {
 	  Rocket.left();
 		System.out.println("LEFT");
 	}
+}
+@Override
+public void keyTyped(KeyEvent e) {
+	// TODO Auto-generated method stub
+	System.out.println("Key typed");
 }
 @Override
 public void keyReleased(KeyEvent e) {
