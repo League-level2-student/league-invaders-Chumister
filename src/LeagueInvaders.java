@@ -18,7 +18,7 @@ public static void main(String[] args) {
 
 }
 
-void setup(){	
+void setup(){	 
 	Invaders.add(Background);
 	Invaders.setSize(WIDTH,HEIGHT);
 	Invaders.setVisible(true);

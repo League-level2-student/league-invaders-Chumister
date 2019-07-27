@@ -1,15 +1,31 @@
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
-	
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;	
+	void loadImage(String imageFile) {
+	    if (needImage) {
+	        try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+	    }
+	}
 	Rocketship Rocket = new Rocketship(250,700,50,50);
 
 final int MENU = 0;
@@ -19,10 +35,15 @@ int currentState = MENU;
 Timer timer;
 Font titlefont;
 Font textfont1;
+ObjectManager object;
 	GamePanel(){
+		if (needImage) {
+		    loadImage ("space.png");
+		}
 		timer= new Timer(1000/60, this);
 		titlefont = new Font("Arial", Font.PLAIN, 48);
 	textfont1= new Font("Arial", Font.PLAIN, 24);
+	object=new ObjectManager(Rocket);
 	}
 	
 	@Override	
@@ -39,6 +60,7 @@ void updateMenuState() {
 	
 }
 void updateGameState() {
+	object.update();
 	
 }
 void  updateEndState()  { 
@@ -55,9 +77,13 @@ void drawMenuState(Graphics g) {
 	g.drawString("Press SPACE for intructions", 100, 600);
 }
 void drawGameState(Graphics g) {
-	g.setColor(Color.BLACK);
-	g.fillRect(0, 0, LeagueInvaders.WIDTH,LeagueInvaders.HEIGHT );
-Rocket.draw(g);
+	if (gotImage) {
+		g.drawImage(image,0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT,this);
+	} else {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+	}
+object.draw(g);
 }
 void drawEndState(Graphics g)  {
 	g.setColor(Color.RED);
