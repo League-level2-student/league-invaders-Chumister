@@ -1,5 +1,4 @@
 import java.awt.Color;
-
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -35,6 +34,7 @@ int currentState = MENU;
 Timer timer;
 Font titlefont;
 Font textfont1;
+Timer Alienspawn;
 ObjectManager object;
 	GamePanel(){
 		if (needImage) {
@@ -100,19 +100,23 @@ public void actionPerformed(ActionEvent e) {
 	repaint();
 }
 void startGame() {
-	timer= new Timer(1000/60,this);
+	timer = new Timer(1000/60, this);
 	timer.start();
+Alienspawn=new Timer(1000, object);
+Alienspawn.start();
 }
 
 @Override
 public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
 	if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-	    if (currentState == END) {
-	        currentState = MENU;
-	    } else {
-	        currentState++;
-	    }
+		if(currentState == END){
+			currentState=MENU;
+		    
+		}else {
+			currentState++;
+		}
+		
 	}   
 	
 	if (e.getKeyCode()==KeyEvent.VK_UP) {
@@ -130,6 +134,10 @@ public void keyPressed(KeyEvent e) {
 	if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 	  Rocket.left();
 		System.out.println("LEFT");
+	}
+	if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+		object.addProjectile(Rocket.getProjectile());
+
 	}
 }
 @Override
