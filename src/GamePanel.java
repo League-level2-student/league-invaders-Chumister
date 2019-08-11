@@ -61,7 +61,9 @@ void updateMenuState() {
 }
 void updateGameState() {
 	object.update();
-	
+if (Rocket.isActive=false) {
+	currentState=END;
+}
 }
 void  updateEndState()  { 
 	
