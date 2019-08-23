@@ -147,6 +147,7 @@ public void keyPressed(KeyEvent e) {
 		if (currentState==GAME) {		
 
 		object.addProjectile(Rocket.getProjectile());
+		
 		}
 		}
 	}
