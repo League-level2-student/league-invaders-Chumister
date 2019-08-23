@@ -4,15 +4,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.Timer;
+
 public class ObjectManager implements ActionListener {
-	ArrayList<Projectile> Projectiles;
-	ArrayList<Alien> aliens;
+	ArrayList<Projectile> 	Projectiles = new ArrayList<Projectile>();
+	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	Random random;
 	Rocketship ship;
+	int score;
 	ObjectManager(Rocketship rocket) {
 		this.ship=rocket;
-		Projectiles = new ArrayList<Projectile>();
-		aliens = new ArrayList<Alien>();
+	score = 0;
+	GamePanel panel;
+	}
+	public void getscore(){
+		int score;
 	}
 
 	void addProjectile(Projectile projectile) {
@@ -82,8 +88,6 @@ public class ObjectManager implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-			addAlien();
+		// TODO Auto-generated method stub		
 		}
 }

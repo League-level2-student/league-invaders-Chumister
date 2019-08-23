@@ -100,6 +100,9 @@ void drawEndState(Graphics g)  {
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	repaint();
+	if (e.getSource().equals(Alienspawn)==true) {
+		object.addAlien();
+	}
 }
 void startGame() {
 	timer = new Timer(1000/60, this);
@@ -113,14 +116,17 @@ public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
 	if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		if(currentState == END){
+			Alienspawn.stop();			
 			currentState=MENU;
-		    
-		}else {
-			currentState++;
+			}
+		if (currentState==GAME) {
+			startGame();
 		}
 		
+		else {
+			currentState++;
+		}		
 	}   
-	
 	if (e.getKeyCode()==KeyEvent.VK_UP) {
 		Rocket.up();
 	    System.out.println("UP");
@@ -138,10 +144,12 @@ public void keyPressed(KeyEvent e) {
 		System.out.println("LEFT");
 	}
 	if (e.getKeyCode()==KeyEvent.VK_SPACE) {
-		object.addProjectile(Rocket.getProjectile());
+		if (currentState==GAME) {		
 
+		object.addProjectile(Rocket.getProjectile());
+		}
+		}
 	}
-}
 @Override
 public void keyTyped(KeyEvent e) {
 	// TODO Auto-generated method stub
