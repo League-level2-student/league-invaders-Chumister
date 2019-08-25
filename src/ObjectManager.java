@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.Timer;
 
 public class ObjectManager implements ActionListener {
-	ArrayList<Projectile> 	Projectiles = new ArrayList<Projectile>();
+	ArrayList<Projectile> Projectiles = new ArrayList<Projectile>();
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	Random random;
 	Rocketship ship;
@@ -17,26 +17,26 @@ public class ObjectManager implements ActionListener {
 	score = 0;
 	GamePanel panel;
 	}
-	public void getscore(){
+	
+	void getscore(){
 		int score;
 	}
 
-	void addProjectile(Projectile projectile) {
-		Projectiles.add(new Projectile(random.nextInt(LeagueInvaders.HEIGHT), 0, 50, 50));
+	 void addProjectile(Projectile projectile) {
+		Projectiles.add(projectile);
 	}
 
-	void addAlien() {
+	 void addAlien() {
 
 		aliens.add(new Alien(random.nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 
 	}
 
-	void update() {
+	 void update() {
 		for (int i = 0; i < aliens.size(); i++) {
 			aliens.get(i).update();
 			if (aliens.get(i).y > LeagueInvaders.HEIGHT) {
 				aliens.get(i).isActive = false;
-
 			}
 		}
 		for (int a = 0; a < Projectiles.size(); a++) {
@@ -86,8 +86,13 @@ public class ObjectManager implements ActionListener {
 		
 	}
 
+	
+	public void addActionListener(GamePanel gamePanel) {
+		// TODO Auto-generated method stub
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub		
-		}
-}
+		// TODO Auto-generated method stub
+
+	}
+	}

@@ -1,3 +1,4 @@
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -44,7 +45,7 @@ ObjectManager object;
 		titlefont = new Font("Arial", Font.PLAIN, 48);
 	textfont1= new Font("Arial", Font.PLAIN, 24);
 	object=new ObjectManager(Rocket);
-	}
+	timer.start();}
 	
 	@Override	
 public void paintComponent(Graphics g) {
@@ -99,14 +100,23 @@ void drawEndState(Graphics g)  {
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
+	if (currentState==MENU) {
+		updateMenuState();
+		
+	}
+	else if (currentState==GAME) {
+		updateGameState();
+		
+	}
+	else if (currentState==END) {
+		updateEndState();
+	}
 	repaint();
 	if (e.getSource().equals(Alienspawn)==true) {
 		object.addAlien();
 	}
-}
+	}
 void startGame() {
-	timer = new Timer(1000/60, this);
-	timer.start();
 Alienspawn=new Timer(1000, object);
 Alienspawn.start();
 }
@@ -114,19 +124,16 @@ Alienspawn.start();
 @Override
 public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
+	System.out.println(currentState);
 	if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-		if(currentState == END){
-			Alienspawn.stop();			
-			currentState=MENU;
-			}
-		if (currentState==GAME) {
-			startGame();
-		}
-		
-		else {
-			currentState++;
-		}		
-	}   
+		  if (currentState == END) {
+		        currentState = MENU;
+		    } else {
+		        currentState++;
+		    }
+		}   
+	   
+	
 	if (e.getKeyCode()==KeyEvent.VK_UP) {
 		Rocket.up();
 	    System.out.println("UP");
